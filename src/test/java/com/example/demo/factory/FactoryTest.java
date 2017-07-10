@@ -13,9 +13,6 @@ import org.junit.Test;
  */
 public class FactoryTest {
 
-  List<String> list = new ArrayList<String>();
-
-  Iterator<String> ite1 = list.iterator();
 
   @Test
   public void shapeTest() {

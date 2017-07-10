@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config>
+  <className>com.example.demo.factory.ConcreteFactory1</className>
+</config>
