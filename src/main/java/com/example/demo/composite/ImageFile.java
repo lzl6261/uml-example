@@ -8,7 +8,7 @@ package com.example.demo.composite;
  */
 public class ImageFile extends AbstractFile {
 
-  private String name;
+  private String name; 
 
   public ImageFile(String name) {
     this.name = name;
