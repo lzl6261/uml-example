@@ -1,6 +1,5 @@
 package com.databps.admin.controller;
 
-import com.databps.admin.domain.User;
 import com.databps.admin.service.UserService;
 import com.databps.admin.vo.UserVO;
 import com.databps.core.mongo.plugin.MongoPage;
