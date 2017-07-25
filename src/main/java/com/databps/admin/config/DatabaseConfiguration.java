@@ -13,9 +13,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.ViewResolver;
 
 @Configuration
-@EnableMongoRepositories("com.databps.admin.dao")
+@EnableMongoRepositories("com.databps.admin.repository")
 @Import(value = MongoAutoConfiguration.class)
 public class DatabaseConfiguration {
 
@@ -32,4 +33,6 @@ public class DatabaseConfiguration {
         mongobee.setEnabled(true);
         return mongobee;
     }
+
+
 }

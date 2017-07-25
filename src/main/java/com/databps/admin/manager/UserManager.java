@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserManager {
 
-  @Autowired
-  private UserDao userDao;
+//  @Autowired
+//  private UserDao userDao;
 
-  public User findByUserName(String userName){
-    return userDao.findOneByUserName(userName).get();
-  }
+//  public User findByUserName(String userName){
+//    return userDao.findOneByUserName(userName).get();
+//  }
 
 }
