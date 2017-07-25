@@ -4,6 +4,8 @@ import com.databps.admin.domain.User;
 import com.databps.admin.vo.UserVO;
 import com.databps.core.mongo.plugin.MongoPage;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  * 用户
@@ -13,7 +15,7 @@ import java.util.List;
  */
 public interface UserService {
 
-  List<UserVO> listOnPage(MongoPage page);
+  List<UserVO> listOnPage(Pageable pageable);
 
   List<UserVO> listByUserName(String username);
 

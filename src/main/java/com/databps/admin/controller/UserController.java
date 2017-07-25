@@ -7,6 +7,7 @@ import com.datbps.core.web.base.BaseController;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 /**
  * 用户
  *
- * @author merlin
+ * @author me
  * @create 2017-07-20 下午7:35
  */
 @Controller
@@ -33,12 +34,12 @@ public class UserController extends BaseController {
    * 用户列表页面
    */
   @RequestMapping(value = "/list", method = RequestMethod.GET)
-  public String list(MongoPage page, Model model, HttpServletRequest request) {
+  public String list(Pageable pageable, Model model, HttpServletRequest request) {
 
-    List<UserVO> userList = userService.listOnPage(page);
+    List<UserVO> userList = userService.listOnPage(pageable);
 
     model.addAttribute("userList", userList);
-    model.addAttribute("page", page);
+    model.addAttribute("page", pageable);
 
     return "user/list";
   }

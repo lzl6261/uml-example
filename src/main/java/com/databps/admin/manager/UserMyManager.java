@@ -3,18 +3,20 @@ package com.databps.admin.manager;
 import com.databps.admin.dao.UserDao;
 import com.databps.admin.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author merlin
  * @create 2017-07-21 上午11:11
  */
+@Service
 public class UserMyManager {
 
   @Autowired
   private UserDao userDao;
 
   public User findByUserName(String userName){
-    return userDao.findByUserName(userName);
+    return userDao.findOneByUserName(userName).get();
   }
 
 }

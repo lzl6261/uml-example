@@ -17,7 +17,7 @@ public class UserManager {
   private UserDao userDao;
 
   public User findByUserName(String userName){
-    return userDao.findByUserName(userName);
+    return userDao.findOneByUserName(userName).get();
   }
 
 }

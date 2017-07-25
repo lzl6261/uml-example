@@ -2,6 +2,7 @@ package com.databps.admin.domain;
 
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * 用户
@@ -14,17 +15,11 @@ public class User implements Serializable{
   @Id
   private String _id;
 
-  private String uname;
+  @Field("user_name")
+  private String userName;
 
   private String level;
 
-  public String getUname() {
-    return uname;
-  }
-
-  public void setUname(String uname) {
-    this.uname = uname;
-  }
 
   public String getLevel() {
     return level;
@@ -40,5 +35,13 @@ public class User implements Serializable{
 
   public void set_id(String _id) {
     this._id = _id;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 }
