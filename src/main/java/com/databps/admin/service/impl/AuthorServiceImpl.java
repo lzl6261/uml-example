@@ -37,7 +37,7 @@ public class AuthorServiceImpl implements AuthorService {
   public void save(AuthorVO authorVO) {
     log.debug("Request to save Author : {}", authorVO);
     Author author = authorMapper.toEntity(authorVO);
-    //authorRepository.save(author);
+    authorRepository.save(author);
   }
 
   /**

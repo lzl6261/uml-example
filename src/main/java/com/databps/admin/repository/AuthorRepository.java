@@ -27,22 +27,24 @@ public class AuthorRepository {
 
     Query query = new Query();
 
-    if(StringUtils.isNoneBlank(name)){
+    if (StringUtils.isNoneBlank(name)) {
       query.addCriteria(Criteria.where("name").is(name));
     }
 
     Sort sort = new Sort(Direction.DESC, "create_time");
 
-
-    long count=mongoOperations.count(query, Author.class, "author");
+    long count = mongoOperations.count(query, Author.class, "author");
 
     query.with(pageable).with(sort);
 
     List<Author> authorList = mongoOperations.find(query, Author.class, "author");
 
-    //Page<Author> findAllByName(Pageable pageable, String name);
-
     return new PageImpl(authorList, pageable, count);
   }
 
+  public void save(Author author) {
+
+    mongoOperations.save(author);
+
+  }
 }
