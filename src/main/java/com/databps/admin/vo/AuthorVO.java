@@ -20,13 +20,10 @@ public class AuthorVO implements Serializable {
 
   @NotNull
   @Size(min = 1, max = 20)
-  @Field("name")
   private String name;
 
-  @Field("birth_date")
   private LocalDate birthDate;
 
-  @Field("description")
   private String description;
 
   public String getId() {

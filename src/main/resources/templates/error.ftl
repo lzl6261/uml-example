@@ -143,7 +143,6 @@
 </head>
 <body>
 <div class="container">
-${error}
 </div>
 </body>
 </html>

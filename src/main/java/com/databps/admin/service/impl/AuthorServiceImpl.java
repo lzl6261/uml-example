@@ -25,7 +25,7 @@ public class AuthorServiceImpl implements AuthorService {
   private AuthorRepository authorRepository;
 
   @Autowired
-  private AuthorMapper authorMapper;
+  public AuthorMapper authorMapper;
 
   /**
    * Save a author.

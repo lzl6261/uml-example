@@ -41,7 +41,7 @@ public class AuthorController {
 
     model.addAttribute("page", page);
 
-    return "user/list";
+    return "author/list";
   }
 
   @RequestMapping(value = "/add", method = RequestMethod.GET)
