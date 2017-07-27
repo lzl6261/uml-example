@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,8 @@ public class AuthorController {
   @RequestMapping(value = "/save", method = RequestMethod.POST)
   public String save(@Valid AuthorVO authorVO) {
 
-    if (authorVO.getId() == null) {
-      authorService.save(authorVO);
+    if (StringUtils.isBlank(authorVO.getId())) {
+      authorService.insert(authorVO);
     } else {
       authorService.update(authorVO);
     }

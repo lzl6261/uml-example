@@ -34,10 +34,11 @@ public class AuthorServiceImpl implements AuthorService {
    * @return the persisted entity
    */
   @Override
-  public void save(AuthorVO authorVO) {
+  public void insert(AuthorVO authorVO) {
     log.debug("Request to save Author : {}", authorVO);
     Author author = authorMapper.toEntity(authorVO);
-    authorRepository.save(author);
+    author.setId(null);
+    authorRepository.insert(author);
   }
 
   /**

@@ -16,7 +16,7 @@ public interface AuthorService {
      * @param authorVO the entity to save
      * @return the persisted entity
      */
-    void save(AuthorVO authorVO);
+    void insert(AuthorVO authorVO);
 
     /**
      *  Get all the authors.

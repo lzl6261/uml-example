@@ -43,9 +43,9 @@ public class AuthorRepository {
     return new PageImpl(authorList, pageable, count);
   }
 
-  public void save(Author author) {
+  public void insert(Author author) {
 
-    mongoOperations.save(author);
+    mongoOperations.insert(author);
 
   }
 
