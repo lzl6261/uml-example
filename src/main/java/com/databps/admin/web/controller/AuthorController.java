@@ -5,6 +5,7 @@ import com.databps.admin.service.AuthorService;
 import com.databps.admin.vo.AuthorVO;
 import java.io.File;
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +35,6 @@ public class AuthorController {
   @Autowired
   private AuthorService authorService;
 
-  private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public String getAllAuthors(Pageable pageable,
@@ -50,10 +51,25 @@ public class AuthorController {
     return "author/edit";
   }
 
+  @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+  public String edit(@PathVariable("id") String id, Model model) {
+
+    Author author = authorService.findOne(id);
+
+    model.addAttribute("author", author);
+
+    return "author/edit";
+  }
+
+
   @RequestMapping(value = "/save", method = RequestMethod.POST)
   public String save(@Valid AuthorVO authorVO) {
 
-    authorService.save(authorVO);
+    if (authorVO.getId() == null) {
+      authorService.save(authorVO);
+    } else {
+      authorService.update(authorVO);
+    }
 
     return "redirect:list";
   }

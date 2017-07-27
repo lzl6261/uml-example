@@ -7,7 +7,8 @@
 </head>
 <body>
 <form action="${base}/author/save" method="post">
-  <input type="text" name="name" value="" />名字
+  <input type="hidden" name="id" value="${author.id}">
+  <input type="text" name="name" value="${author.name}" />名字
 
   <input  type="submit" value="提交"/>
 </form>

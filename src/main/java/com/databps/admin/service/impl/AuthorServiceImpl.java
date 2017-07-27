@@ -61,8 +61,7 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public Author findOne(String id) {
     log.debug("Request to get Author : {}", id);
-    //return authorRepository.findOne(id);
-    return null;
+    return authorRepository.findOne(id);
   }
 
   /**
@@ -74,5 +73,11 @@ public class AuthorServiceImpl implements AuthorService {
   public void delete(String id) {
     log.debug("Request to delete Author : {}", id);
     //authorRepository.delete(id);
+  }
+
+  @Override
+  public void update(AuthorVO authorVO) {
+    Author author = authorMapper.toEntity(authorVO);
+    authorRepository.update(author);
   }
 }

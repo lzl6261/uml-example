@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -46,5 +47,19 @@ public class AuthorRepository {
 
     mongoOperations.save(author);
 
+  }
+
+  public Author findOne(String id) {
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").is(id));
+    return mongoOperations.findOne(query, Author.class);
+  }
+
+  public void update(Author author){
+    Query query = new Query();
+    query.addCriteria(Criteria.where("_id").is(author.getId()));
+    Update update=new Update();
+    update.set("name",author.getName());
+    mongoOperations.updateFirst(query,update,"author");
   }
 }

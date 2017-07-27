@@ -40,4 +40,6 @@ public interface AuthorService {
      *  @param id the id of the entity
      */
     void delete(String id);
+
+    void update(AuthorVO authorVO);
 }

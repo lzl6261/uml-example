@@ -21,6 +21,7 @@
     </div>
   </div>
 </form>
+<a href="add">新建</a>
 <table class="table table-bordered table-hover">
   <thead>
   <tr>
@@ -32,6 +33,7 @@
   [#list page.content as author]
   <tr class="active">
     <td class="active">${author.name}</td>
+    <td><a href="edit/${author.id}">编辑</a></td>
   </tr>
   [/#list]
   </tbody>
