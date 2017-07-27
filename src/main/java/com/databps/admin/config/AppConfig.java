@@ -57,7 +57,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
   @Bean
   public FreeMarkerConfigurer freemarkerConfig() throws IOException, TemplateException {
     FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationFactory();
-    factory.setTemplateLoaderPaths("classpath:templates", "src/main/resource/templates");
+    factory.setTemplateLoaderPath("classpath:/templates/");
     factory.setDefaultEncoding("UTF-8");
     FreeMarkerConfigurer result = new FreeMarkerConfigurer();
 
@@ -68,7 +68,8 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     settings.put("number_format", "#");
     settings.put("cache_storage","freemarker.cache.NullCacheStorage");
     settings.put("template_update_delay","0");
-    settings.put("locale","zh_CN");
+    settings.put("locale","en");
+    settings.put("auto_import","ftl/index.ftl as p");
     factory.setFreemarkerSettings(settings);
 
     result.setConfiguration(factory.createConfiguration());

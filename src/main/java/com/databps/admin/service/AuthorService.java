@@ -24,7 +24,7 @@ public interface AuthorService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Author> findAll(Pageable pageable);
+    Page<Author> findAllByName(Pageable pageable,String name);
 
     /**
      *  Get the "id" author.

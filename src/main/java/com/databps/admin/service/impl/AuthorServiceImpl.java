@@ -37,7 +37,7 @@ public class AuthorServiceImpl implements AuthorService {
   public void save(AuthorVO authorVO) {
     log.debug("Request to save Author : {}", authorVO);
     Author author = authorMapper.toEntity(authorVO);
-    authorRepository.save(author);
+    //authorRepository.save(author);
   }
 
   /**
@@ -47,9 +47,9 @@ public class AuthorServiceImpl implements AuthorService {
    * @return the list of entities
    */
   @Override
-  public Page<Author> findAll(Pageable pageable) {
+  public Page<Author> findAllByName(Pageable pageable,String name) {
     log.debug("Request to get all Authors");
-    return authorRepository.findAll(pageable);
+    return authorRepository.findAllByName(pageable,name);
   }
 
   /**
@@ -61,7 +61,8 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public Author findOne(String id) {
     log.debug("Request to get Author : {}", id);
-    return authorRepository.findOne(id);
+    //return authorRepository.findOne(id);
+    return null;
   }
 
   /**
@@ -72,6 +73,6 @@ public class AuthorServiceImpl implements AuthorService {
   @Override
   public void delete(String id) {
     log.debug("Request to delete Author : {}", id);
-    authorRepository.delete(id);
+    //authorRepository.delete(id);
   }
 }
