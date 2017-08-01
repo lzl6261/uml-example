@@ -1,9 +1,10 @@
 package com.databps.admin.config;
 
 import com.databps.admin.security.AuthoritiesConstants;
+import com.databps.admin.security.Http401UnauthorizedEntryPoint;
 import com.databps.admin.security.jwt.JWTConfigurer;
 import com.databps.admin.security.jwt.TokenProvider;
-import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
+import io.github.jhipster.config.JHipsterProperties;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
+import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.filter.CorsFilter;
 
 @Configuration
@@ -34,9 +37,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final TokenProvider tokenProvider;
 
+  private final JHipsterProperties jHipsterProperties;
+
   private final CorsFilter corsFilter;
 
+  private final RememberMeServices rememberMeServices;
+
   public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder,
+      JHipsterProperties jHipsterProperties, RememberMeServices rememberMeServices,
       UserDetailsService userDetailsService,
       TokenProvider tokenProvider,
       CorsFilter corsFilter) {
@@ -45,6 +53,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     this.userDetailsService = userDetailsService;
     this.tokenProvider = tokenProvider;
     this.corsFilter = corsFilter;
+    this.jHipsterProperties = jHipsterProperties;
+    this.rememberMeServices = rememberMeServices;
+  }
+
+
+  @Bean
+  public Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint() {
+    return new Http401UnauthorizedEntryPoint();
   }
 
   @PostConstruct
@@ -58,10 +74,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
   }
 
-  @Bean
-  public Http401UnauthorizedEntryPoint http401UnauthorizedEntryPoint() {
-    return new Http401UnauthorizedEntryPoint();
-  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
@@ -72,12 +84,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   public void configure(WebSecurity web) throws Exception {
     web.ignoring()
         .antMatchers(HttpMethod.OPTIONS, "/**")
-        .antMatchers("/app/**/*.{js,html}")
-        .antMatchers("/i18n/**")
-        .antMatchers("/content/**")
-        .antMatchers("/swagger-ui/index.html")
-        .antMatchers("/test/**");
+        .antMatchers("/resources/**/*.{js,html}");
   }
+
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -106,8 +115,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/management/health").permitAll()
         .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
         .antMatchers("/v2/api-docs/**").permitAll()
-        .antMatchers("/swagger-resources/configuration/ui").permitAll()
-        .antMatchers("/swagger-ui/index.html").hasAuthority(AuthoritiesConstants.ADMIN)
         .and()
         .apply(securityConfigurerAdapter());
 
@@ -117,8 +124,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     return new JWTConfigurer(tokenProvider);
   }
 
+
   @Bean
   public SecurityEvaluationContextExtension securityEvaluationContextExtension() {
     return new SecurityEvaluationContextExtension();
   }
+
 }

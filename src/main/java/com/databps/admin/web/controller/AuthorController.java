@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * REST controller for managing Author.
  */
 @Controller
-@RequestMapping(value = "/author")
+@RequestMapping(value = "/api/author")
 public class AuthorController {
 
   private final Logger log = LoggerFactory.getLogger(AuthorController.class);

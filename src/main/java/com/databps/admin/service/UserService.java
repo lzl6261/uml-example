@@ -1,9 +1,11 @@
 package com.databps.admin.service;
 
+import com.databps.admin.domain.Admin;
 import com.databps.admin.domain.User;
 import com.databps.admin.vo.UserVO;
 import com.databps.core.mongo.plugin.MongoPage;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,4 +29,9 @@ public interface UserService {
 
   void insert(UserVO userVO);
 
+
+  Optional<Admin> findOneByLogin(String login);
+
+  Admin createUser(String login, String password, String firstName, String lastName, String email,
+      String imageUrl, String langKey);
 }
